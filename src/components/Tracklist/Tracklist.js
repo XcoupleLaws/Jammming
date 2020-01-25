@@ -17,10 +17,13 @@ export default class TrackList extends Component{
                     <Track 
                     track= {item}
                     onAdd={this.props.onAdd}
+                    onRemove={this.props.onRemove}
                     key={id}
                     name={name} 
                     artist={artist} 
-                    album={album} /> )
+                    album={album} 
+                    isRemoval= {this.props.isRemoval}/> )
+                    
             })
         )}
     }

@@ -7,11 +7,24 @@ export default class SearchBar extends Component{
     addTrack = () =>{
         this.props.onAdd(this.props.track);
         console.log('this.props.track: ', this.props.track);
+        
+    }
+
+    removeTrack = () =>{
+        this.props.onRemove(this.props.track);
     }
     
-   /* renderAction = () =>{
-        this.props.isRemoval ? '-' : '+';
-    }*/
+    renderAction = () =>{
+       if(this.props.isRemoval){
+           return (<button 
+            className="Track-action" 
+            onClick={this.addTrack} >+</button>)
+       }else{
+           return(<button 
+            className="Track-action"
+            onClick={this.removeTrack} >-</button>)
+       }
+    }
     
     render(){
         return(
@@ -20,7 +33,7 @@ export default class SearchBar extends Component{
                     <h3>{this.props.name}</h3>
                     <p>{`${this.props.artist} ${this.props.album}`}</p>
                 </div>
-        <button className="Track-action" onClick={this.addTrack} >+{/*this.renderAction()*/}</button>
+                {this.renderAction()}
             </div>
         )
     }

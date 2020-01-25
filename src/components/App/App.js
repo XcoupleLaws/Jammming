@@ -22,17 +22,36 @@ class App extends Component {
     playlistTracks: []
 } 
   
+  updatePlaylistName = (event) =>{
+      this.setState({
+        playlistName: event.target.value,
+      })
+  } 
+
   addTrack = (track) =>{
-    console.log(this.state.playlistTracks);
     if(!this.state.playlistTracks.some(item=>item.id===track.id)){
       this.setState({
         playlistTracks : [...this.state.playlistTracks, track]
       })
     }
-    
   }
 
+  removeTrack = (track) =>{
+    const renderPlaylist=this.state.playlistTracks.filter(item=> !(track.id === item.id));
     
+    this.setState({
+      playlistTracks: renderPlaylist,
+    })
+  }
+
+  savePlaylist= ()=>{
+    const trackURIs= this.state.playlistTracks.map(item=> item.Uri);
+    console.log('trackURIs: ', trackURIs);
+    this.setState({
+      trackURIs,
+    })
+  }  
+
 
   render(){
     return (
@@ -46,7 +65,10 @@ class App extends Component {
             onAdd={this.addTrack}/>
             <Playlist 
             playlistName={this.state.playlistName} 
-            playlistTracks={this.state.playlistTracks} />
+            playlistTracks={this.state.playlistTracks}
+            onRemove={this.removeTrack}
+            onNameChange={this.updatePlaylistName}
+            onSave={this.savePlaylist} />
           </div>
         </div>
       </div>
