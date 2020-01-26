@@ -51,13 +51,12 @@ class App extends Component {
     })
   }
 
-  savePlaylist= ()=>{
-    const uri= this.state.playlistTracks.map(item=> item.uri);
+  savePlaylist=()=>{
+    const uri= this.state.playlistTracks.map(item => item.uri);
     this.setState({
       uri,
     })
-    console.log(this.state.uri);
-    Spotify.savePlaylist(this.state.playlistName, this.state.uri);
+    setTimeout(()=>{Spotify.savePlaylist(this.state.playlistName, this.state.uri)},2000);
   }  
 
 
